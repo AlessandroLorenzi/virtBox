@@ -1,0 +1,25 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+	<h2>Lista Macchine</h2>
+	
+	{% for macchina in lista_macchine %}
+	<div class="box">
+		<h3><img src="/static/img/pixmaps/state_{{ macchina['state'] }}.png" /> <a href="/macchina/{{ macchina['nome'] }}/">{{ macchina["nome"] }}</a> </h3>
+		<p>
+			Descrizione della macchina
+		</p>
+		<p style="font-size: small">
+			{% if macchina['state'] != "running" %}
+				<a href="/macchina/{{ macchina['nome']}}/avvia/">Avvia</a>
+			{% else %}
+				<a href="/macchina/{{ macchina['nome']}}/visualizza/">Visualizza</a>
+				<a href="/macchina/{{ macchina['nome']}}/force_off/">Force Off</a>
+			{% end %}
+		</p>
+	</div>
+	{% end %}
+	
+{% end %}
+

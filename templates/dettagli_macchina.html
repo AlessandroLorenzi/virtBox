@@ -1,0 +1,29 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+	<h2>Dettagli Macchina "{{nome}}"</h2>
+	<div >
+	<p>
+		memoria : {{memory}}Mb <br />
+		emulatore: {{emulator}} <br />
+		cpu: {{vcpu}} <br />
+		architettura: {{arch}} <br />
+		{% if vnc_port != '-1' %}
+			vnc: <a href="vlc://darkstar.ricerca.dico.unimi.it:{{vnc_port}}">darkstar.ricerca.dico.unimi.it:{{vnc_port}}</a>
+		{% end %}
+	</p>
+	<h3>Dischi</h3>
+	<div class= "box">
+
+		{% for device in devices %}
+		<h4>{{device['name']}}</h4>
+		<p>
+				path: {{device['path']}}<br />
+				dev: {{device['dev']}}
+		</p>
+		{% end %}
+	</div>
+{% end %}
+
+

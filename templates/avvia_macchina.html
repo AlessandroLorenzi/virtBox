@@ -1,0 +1,10 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+	{% if state == '5' %}
+		<h2>La macchina {{nome}} &egrave; stata avviata correttamente.</h2>
+	{% else %}
+		<h2>Errore durante l'avvio della macchina <a href="/macchina/{{nome}}/">{{nome}}</a>.</h2>
+	{% end %}
+{% end %}
