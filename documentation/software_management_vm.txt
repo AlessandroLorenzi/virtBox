@@ -1,0 +1,15 @@
+*oVirt*
+Produttore: RedHat
+Licenza: GNU GPL v2
+Ultima Versione: 0.100-4
+Note: Necessario fedora? : [The server requires Fedora 11 on a machine with a minimum of two network interfaces. The node requires Fedora 11 installed on a machine with hardware virtualization support.]
+
+In cosa consiste:
+Ovirt é un sistema per il management di macchine virtuali. 
+É composto dall'immagine di un host che fornisce libvirt ed ospita le macchine virtuali.
+Grazie a libvirt é possibile utilizzare Xen(linux/solaris), qemu/KVM, LXC, OpenVZ, User Mode Linux, VirtualBox
+Console di gestione via web.
+
+Gli utenti non hanno accesso all'hardware; automatizza la gestione del carico e semplifica la gestione delle macchine.
+
+*HyperVM*

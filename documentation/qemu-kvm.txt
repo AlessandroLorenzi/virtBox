@@ -1,0 +1,14 @@
+-- Preparazione disco
+# qemu-img create -f qcow2 nomefile.qcow 10G
+
+-- Preparazione disco con base preesistente
+# qemu-img create -f qcow2 -b nomefile.qcow nomefile_2_.qcow 10G
+
+-- Caricamento moduli kernel
+# modprobe kvm
+# modprobe kvm-[intel|amd]
+
+-- Avvio macchina
+# qemu-kvm os.qcow -nographic -daemonize -vnc :0
+
+Visibile con _vinagre_ o altro _vncviewer_

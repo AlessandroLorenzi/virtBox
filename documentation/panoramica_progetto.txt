@@ -1,0 +1,33 @@
+=> Usecase
+Admin
+	Creare template
+	Eliminare template
+	Eliminare macchine virtuali
+
+Professore
+	Creare template
+	Creare macchine da template
+	Avviare macchine
+	Controllare macchine proprie e di studenti
+	Eliminare template
+	Download immagini macchine virtuali
+	
+Studente
+	Creare macchine da template
+	Avviare macchine
+	Controllare macchine proprie
+	Download immagini macchine virtuali
+
+=> System Install
+04.02.2010
+    Installazione CentOS pulita
+    Installazione pacchetti
+     -> libvirt
+	 -> virt-manager
+	 -> kvm
+
+Link
+http://www.cnaponline.com/articoli_virtualizzazione/40/virtualizzazione_tipi_e_differenze.htm
+http://www.vmware.com/it/virtualization/
+http://ovirt.org/
+http://www.ibm.com/developerworks/linux/library/l-linux-kvm/

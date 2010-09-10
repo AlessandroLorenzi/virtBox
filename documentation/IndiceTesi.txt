@@ -1,0 +1,36 @@
+1. Virtualizzazione
+	- Di cosa si tratta
+	- I vantaggi della virtualizzazione
+		(partizionamento, isolamento, macchine di test, costo monetario...)
+	- Tipi di virtualizzazione
+		- Full Virtualization
+		- Paravirtualizzazione
+		- Hardware Assisted Virtualization
+		- Containers
+2. Software di virtualizzazione
+	- Software di virtualizzazione
+		- xen
+		- kvm
+		- OpenVZ
+		- VMWare
+		- VirtualBox
+		- chroot, clinux
+	- Virtal Server Managing
+		- oVirt
+	    	- Proxmox VE 
+		- ConVirt
+3. Test prestazioni
+	- Carico massimo
+	- Tempo di boot
+	- Database
+4. Progetto della tesi - Un sistema per gestire un laboratorio virtuale
+	- Tool utilizzati
+		- Debian
+		- Kvm
+		- oVirt
+	- Problematiche affrontate
+		- ...
+	- Pulgins
+		- ...
+	- Test effettuati
+		- ...

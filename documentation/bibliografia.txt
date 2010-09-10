@@ -1,0 +1,13 @@
+Bibliografia
+Virtual Machines: Versatile Platforms for Systems and Processes (The Morgan Kaufmann Series in Computer Architecture and Design). Jim Smith, Ravi
+Nair
+
+Comparison of Virtual Machines, http://en.wikipedia.org/wiki/Comparison_of_virtual_machines
+
+What is virtualization? http://www.vmware.com/virtualization/
+
+User Mode Linux (UML), http://user-mode-linux.sourceforge.net/
+
+OpenVZ, http://openvz.org/
+
+http://books.google.it/books?id=dEGqJtGPwbgC&lpg=PA64&dq=macchine%20virtuali&pg=PA67#v=onepage&q=macchine%20virtuali&f=false

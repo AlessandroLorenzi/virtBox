@@ -1,0 +1,22 @@
+\documentclass[a4paper,10pt]{book}
+
+
+\begin{document}
+\chapter{Virtualizzare una macchina}
+La virtualizzazione di sistemi é una tecnica che negli ultimi anni sta predendo piede a grande velocitá e si sta affinando in maniera sorprendente. La virtualizzazione consiste nel creare un'ambiente che simuli un'hardware virtuale. In questo modo avremo la possibilitá di far risiedere su una sola macchina piú sistemi operativi contemporaneamente, simulando inoltre un'hardware diverso, ad esempio virtualizzando una macchina ARM per sviluppare applicazioni per cellulari Android senza dover eseguire test sul cellulare.
+
+I primi esperimenti di macchina virtuale sono stati fatti negli anni '60 per suddividere le risorse dei mainframe e rederli, di fatto, macchine multitasking. Dati gli altissimi costi era utile poter utilizzare la stessa macchina per piú processi contemporaneamente.
+
+La virtualizzazione peró non ha subito grandi innovazioni fino al 1999 quando VMWare propone una virtualizzazione del sistema Intel x86. La problematica principale della virtualizzazione su questa piattaforma era che non era stata creata appositamente per la virtualizzazione; tra le altre cose spicca la presenza di 17 istruzioni macchina che, quando eseguite dalla macchina ospite causavano un errore che comportava vari problemi dala chiusura del programma fino al crash del sistema. Questo ostacolo é stato aggirato bloccando queste istruzioni e modificandole in istruzioni virtualizzate.
+
+\section{I vantaggi della virtualizzazione}
+Utilizzare la virtualizzazione risolve vari problemi che si possono affrontare nella gestione di un reparto IT.
+
+Prima di tutto possiamo sfruttare al meglio l'hardware a disposizione. Chiunque con un po di esperienza avrá notato che un server sottoposto ad un carico medio di lavoro sfrutta il 10~15\% delle risorse; se in un solo server abbiamo la possibilitá di eseguire piú funzionalitá avremo un maggiore utilizzo delle risorse. Bisogna peró assicurarsi di poter affrontare un carico critico: nel caso in cui uno dei server ospitati richieda un maggior quantitativo di risorse non devono esserci problemi.
+
+In secondo luogo abbiamo un beneficio in termini di sicurezza. Nel caso in cui volessimo utilizzare un solo server per gestire tutti i servizi necessari senza utilizzare la soluzione di virtualizzazione, in caso di un buco in uno dei servizi puó essere compromessa tutta la struttura. Ad esempio possiamo avere un server mail con installati web server apache, dbms postgres per la webmail e mail server postfix/dovecot nel caso in cui un malintenzionato ottenga accesso al sistema tramite un baco in apache sarebbe tutto compromesso, oppure se tramite un attacco DDoS viene attaccato il server postfix tutto il sistema viene rallentato. Con un sistema di virtualizzazione possiamo invece creare tre differenti macchine virtuali e dividere attentamente le risorse tra le tre. In caso di attacco ad uno dei server virtuali gli altri servizi non subiscono rallentamenti potendo leggere comunque la mail tramite protocollo imap/pop. \\
+Inoltre sono anche facilitati i processi di backup/restore in quanto é possibile salvare lo stato della macchina e apportare modifiche incrementali.
+
+Un'aspetto che puó interesare il reparto manageriale é il (doppio) risparmio monentario. In primo luogo possiamo acquistare un quantitativo molto inferiore di hardware, con un risparmio immediato. Inoltre, sul lungo termine possiamo risparmiare sull'aspetto energetico. 
+
+\end{document}
