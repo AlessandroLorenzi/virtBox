@@ -1,0 +1,24 @@
+{% extends "../templates/main.html" %}
+{%block menu-utente%}attivo{%end%}
+
+{%block main%}
+
+{% if error != 0 %}
+	<div class="error">
+		<p>
+			Si é verificato un errore! {{error}}
+		</p>
+	</div>
+{% end %}
+<form method="post">
+	{{ xsrf_form_html() }}
+	<div class="label">Matricola </div><input type="text" name="matricola" />  <br />
+	<div class="label">Cognome </div><input type="text" name="cognome" /> <br />
+	<div class="label">Nome </div><input type="text" name="nome" /> <br />
+	<div class="label">Password </div><input type="password" name="passwd" /><br /> 
+	<div class="label">Ripeti Password </div><input type="password" name="repasswd" /> <br />
+	<input type ="submit" value= "registra" />
+</form>
+
+
+{%end%}

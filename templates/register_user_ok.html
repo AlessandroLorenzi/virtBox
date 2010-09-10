@@ -1,0 +1,19 @@
+{% extends "../templates/main.html" %}
+{%block menu-utente%}attivo{%end%}
+
+{%block main%}
+
+	<div class="box">
+		<p>
+			Utente registrato con successo, ritorna alla <a href="/">home</a>. <br />
+		</p>
+	</div>
+	<h2>Memo Utente</h2>
+	<p>
+		Matricola: {{matricola}} <br />
+		Utente: {{cognome}} {{nome}} <br />
+		Password: {{passwd}}
+	</p>
+
+
+{%end%}
