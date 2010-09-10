@@ -65,3 +65,8 @@ div.box { margin-bottom: 1.5em; padding: 0.65em; background: #ecf2f5; border: 1p
 	width:280px;
 	float: left;	
 }
+
+.label{
+	float: left;
+	width: 200px;
+}

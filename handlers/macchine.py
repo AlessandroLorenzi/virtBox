@@ -5,8 +5,8 @@ from xml.dom import minidom
 
 global lvconn
 
-print "== connecting to libvirt =="
-lvconn = libvirt.open('qemu+ssh://alorenzi@darkstar.ricerca.dico.unimi.it/system')
+print "== connecting to libvirt == (Devi riattivarlo, ciula :P )"
+# lvconn = libvirt.open('qemu+ssh://virtmaster@darkstar.ricerca.dico.unimi.it/system')
 
 ''' Mostra una lista delle macchine '''
 class Macchine(BaseHandler):
