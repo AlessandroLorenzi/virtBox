@@ -2,26 +2,30 @@ from handlers.homepage import BaseHandler
 import libvirt
 import xml.dom 
 from xml.dom import minidom
+import os
+import commands
 
 global lvconn
 
-print "== connecting to libvirt == (Devi riattivarlo, ciula :P )"
-# lvconn = libvirt.open('qemu+ssh://virtmaster@darkstar.ricerca.dico.unimi.it/system')
+print "== connecting to libvirt == "
+lvconn = libvirt.open('qemu+ssh://virtmaster@darkstar.ricerca.dico.unimi.it/system')
 
 ''' Mostra una lista delle macchine '''
 class Macchine(BaseHandler):
 	def get(self):
+		
+		matricola = self.get_secure_cookie("AuthUsername")
 
+		self.cursor.execute("SELECT nome FROM macchine WHERE id_owner = %s;" % matricola)
+		self.database.commit()
+		
+		nomi_macchine = list()
+		for (i) in  self.cursor:
+			nomi_macchine.append( i[0] )
+		
 		lista_macchine = list()
-		for id in lvconn.listDefinedDomains():
-			macchina={
-				"state": "shutoff",
-				"nome": id,
-				"uuid": "",
-			}
-			lista_macchine.append(macchina)
-			
-		for id in lvconn.listDomainsID():
+		
+		for id in nomi_macchine:
 			vm = lvconn.lookupByID(id)
 			macchina={
 				"state": "running",
@@ -35,10 +39,13 @@ class Macchine(BaseHandler):
 ''' '''
 class MacchinaAdd(BaseHandler):
 	def get(self):
-		self.render("home.html")
+		self.render("add_macchina.html", error = 0)
+	def post(self):
+		pass
+		
+		
 
 
-''' mostra i dettagli della macchina '''
 class  MacchinaDetails(BaseHandler):
 	def get(self, nome):
 		
@@ -112,4 +119,46 @@ class  MacchinaShow(BaseHandler):
 class  MacchinaForceOff(BaseHandler):
 	def get(self):
 		self.render("home.html")
-	
+
+ 
+class  Dischi(BaseHandler):
+	def get(self):
+		self.cursor.execute("SELECT * FROM disks;")
+		self.database.commit()
+		disks = list()
+		for disk in self.cursor:
+			disk_list = list()
+			disk_list.append(disk[0])
+			disk_list.append(disk[1])
+			disk_list.append(1 - os.path.exists('/home/alorenzi/virtBox/test/tmp/aria2c.' + str(disk[0]) +'.log'))
+			disks.append(disk_list)
+		self.render("dischi.html", lista_dischi = disks)
+
+class  DiscoAdd(BaseHandler):
+	def get(self):
+		self.render("add_disco.html", error = 0)
+		
+	def post(self):
+		error = 0
+		nome = self.get_argument("nome")
+		uri = self.get_argument("uri")
+		dir = '/home/alorenzi/virtBox/test/'
+		comando  = 'aria2c -D '
+		comando += '-l "'+str(dir)+'/tmp/aria2c.' + str(nome) +'.log" '
+		comando += '-d "'+str(dir)+'/libvirt/images/" '+str(uri)
+		
+		
+		self.cursor.execute("SELECT * FROM disks WHERE name ='%s' OR uri = '%s'" % (nome, uri))
+		self.database.commit()
+		
+		for i in self.cursor:
+			error  = 1
+		
+		if error == 0:
+			commands.getstatusoutput(comando)
+			self.cursor.execute("INSERT INTO disks (name, uri) VALUES ('%s', '%s')" % ( nome,uri))
+			self.database.commit()
+			self.render("add_disco_ok.html")
+		else:
+			
+			self.render("add_disco.html", error=error)

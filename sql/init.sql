@@ -27,3 +27,11 @@ CREATE TABLE acl_m2u
 	val 			int,
 	PRIMARY KEY(matricola, nome_macchina, actio)		
 );
+
+
+CREATE TABLE disks
+(
+	name 		VARCHAR(100)	PRIMARY KEY,
+	uri 		VARCHAR(500) 	UNIQUE
+);
+

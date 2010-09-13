@@ -16,7 +16,7 @@ from handlers.homepage import BaseHandler, HomePage
 from handlers.users import UserRegister, UserLogin, UserLogout
 from handlers.templates import Template, TemplateAdd, TemplateDetails, TemplateDel
 from handlers.aule import Aule, AulaAdd, AulaDetails, AulaDel
-from handlers.macchine import Macchine, MacchinaAdd, MacchinaDetails, MacchinaDel, MacchinaRun, MacchinaShow, MacchinaForceOff
+from handlers.macchine import Macchine, MacchinaAdd, MacchinaDetails, MacchinaDel, MacchinaRun, MacchinaShow, MacchinaForceOff, Dischi, DiscoAdd
 
 
 
@@ -33,10 +33,6 @@ class Application(tornado.web.Application):
 			(r"/template/add/", TemplateAdd),
 			(r"/template/(\w*)/", TemplateDetails),
 			(r"/template/(\w*)/del/", TemplateDel),
-			(r"/aule/", Aule),
-			(r"/aula/add/", AulaAdd),
-			(r"/aula/(\w*)/", AulaDetails),
-			(r"/aula/(\w*)/del/", AulaDel),
 			(r"/macchine/", Macchine),
 			(r"/macchina/add/", MacchinaAdd),
 			(r"/macchina/(\w*)/", MacchinaDetails),
@@ -44,6 +40,8 @@ class Application(tornado.web.Application):
 			(r"/macchina/(\w*)/visualizza/", MacchinaShow),
 			(r"/macchina/(\w*)/force_off/", MacchinaForceOff),
 			(r"/macchina/(\w*)/del/", MacchinaDel),
+			(r"/dischi/", Dischi),
+			(r"/disco/add/", DiscoAdd),
 		]
 		
 		settings = {
