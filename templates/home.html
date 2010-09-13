@@ -12,11 +12,19 @@
 	<div id="colonna-separatrice">&nbsp;</div>
 	
 	<div id="colonna-destra">
-		<div>
+		<div class="box">
+			{% if user == ""%}
+				<p>Benvenuto visitatore.</p>
+			{% else %}
+				<p>Benvenuto {{user}}.</p>
+			{%end%}
 			<ul>
-				<li><a href="/utente/registra/">Registra</a></li>
-				<li><a href="/utente/login/">Login</a></li>
-				<li><a href="/utente/logout/">Logout</a></li>
+				{% if user == ""%}
+					<li><a href="/utente/registra/">Registra</a></li>
+					<li><a href="/utente/login/">Login</a></li>
+				{% else %}
+					<li><a href="/utente/logout/">Logout</a></li>
+				{%end%}
 			</ul>
 		</div>
 		<div class="box">

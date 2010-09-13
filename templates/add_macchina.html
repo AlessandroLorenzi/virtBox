@@ -1,0 +1,27 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+	{% if error != 0 %}
+	<div class="error">
+		<p>
+			Si é verificato un errore! {{error}}
+		</p>
+	</div>
+	{% end %}
+	<form method="post">
+		{{ xsrf_form_html() }}
+		<div class="label">Nome </div><input type="text" name="nome" />  <br />
+		<div class="label">Ram </div><input type="text" name="ram" /> (Mbty) <br />
+		<div class="label">DiskImage</div><input type="text" name="disk" /> <br />
+		<div class="label">WhiteDisk </div>
+			<select  name="disk" >
+				<option value="clean_5G.qcow">5Gb</option>
+				<option value="clean_10G.qcow">10Gb</option>
+				<option value="clean_20G.qcow">20Gb</option>
+			</select> <br />
+		
+		<input type ="submit" value= "registra" />
+</form>
+{% end %}
+

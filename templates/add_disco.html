@@ -1,0 +1,21 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+	
+{% if error == 1 %}
+	<div class="error">
+		<p>
+			Si é verificato un errore! {{error}} <br />
+			La macchina é giá esistente!
+		</p>
+	</div>
+{% end %}
+	<form method="post">
+		{{ xsrf_form_html() }}
+		<div class="label">nome </div><input type="text" name="nome" />  <br />
+		<div class="label">uri (http, ftp, torrent) </div><input type="text" name="uri" /><br /> 
+		<input type ="submit" value= "scarica" />
+	</form>
+{% end %}
+
