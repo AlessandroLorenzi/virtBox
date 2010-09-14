@@ -9,7 +9,19 @@ h3 { font-size: 1.25em; margin-top: 1em; }
 h4 { font-size: 1.15em; margin-top: 1em; }
 h5 { font-size: 1em; margin-top: 1em; }
 
+a img{
+	border: 0px; 
+	text-decoration: none;
+}
+
 div.box { margin-bottom: 1.5em; padding: 0.65em; background: #ecf2f5; border: 1px solid #bcd; }
+
+.box table td{
+	padding: 5px 10px;
+
+	background:  #FAFAFF;
+}
+
 div.error { margin-bottom: 1.5em; padding: 0.65em; background: #f5ecf2; border: 1px solid #dbc; }
 
 

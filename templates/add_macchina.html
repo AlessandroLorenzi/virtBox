@@ -12,13 +12,24 @@
 	<form method="post">
 		{{ xsrf_form_html() }}
 		<div class="label">Nome </div><input type="text" name="nome" />  <br />
-		<div class="label">Ram </div><input type="text" name="ram" /> (Mbty) <br />
-		<div class="label">DiskImage</div><input type="text" name="disk" /> <br />
-		<div class="label">WhiteDisk </div>
+		<div class="label">Ram </div><input type="text" name="ram" /> (MB) <br />
+		<div class="label">Architettura </div><input type="text" name="arch" /> (MB) <br />
+		<div class="label">DiskImage</div>
+		<select  name="disk" >
+			<option value="">--</option>
+		{% for disk in disks%}
+			{%if disk[2] == 1%}
+				<option value="{{disk[0]}}">{{disk[0]}}</option>
+			{%end%}
+		{% end %}
+			</select> 
+		 <br />
+		<div class="label">Hard Disk </div>
 			<select  name="disk" >
-				<option value="clean_5G.qcow">5Gb</option>
-				<option value="clean_10G.qcow">10Gb</option>
-				<option value="clean_20G.qcow">20Gb</option>
+				<option value="">--</option>
+				<option value="clean_5G.qcow">5 Gb</option>
+				<option value="clean_10G.qcow">10 Gb</option>
+				<option value="clean_20G.qcow">20 Gb</option>
 			</select> <br />
 		
 		<input type ="submit" value= "registra" />

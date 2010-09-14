@@ -34,7 +34,7 @@ class Application(tornado.web.Application):
 			(r"/template/(\w*)/", TemplateDetails),
 			(r"/template/(\w*)/del/", TemplateDel),
 			(r"/macchine/", Macchine),
-			(r"/macchina/add/", MacchinaAdd),
+			(r"/macchina/new/", MacchinaAdd),
 			(r"/macchina/(\w*)/", MacchinaDetails),
 			(r"/macchina/(\w*)/avvia/", MacchinaRun),
 			(r"/macchina/(\w*)/visualizza/", MacchinaShow),

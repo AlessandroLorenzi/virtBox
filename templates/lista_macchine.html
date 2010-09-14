@@ -2,6 +2,25 @@
 {%block menu-macchine%}attivo{%end%}
 
 {% block main %}
+	<div style="float:left; text-align: center; margin-right: 10px" class="box" >
+		<a href="/macchina/new/" >
+			<img src="/static/img/pixmaps/vm_new_wizard.png" /><br />
+			Nuova Macchina
+		</a>
+	</div>
+	<div style="float:left; text-align: center; margin-right: 10px" class="box">
+		<a href="/disco/add/" >
+			<img src="/static/img/pixmaps/cdrom.png" /><br />
+			Nuovo Disco
+		</a>
+	</div>
+	<div style="float:left; text-align: center; margin-right: 10px" class="box">
+		<a href="/dischi/" >
+			<img src="/static/img/pixmaps/cdrom.png" /><br />
+			Lista Dischi
+		</a>
+	</div>
+	<div style="clear: both"></div>
 	<h2>Lista Macchine</h2>
 	
 	{% for macchina in lista_macchine %}
