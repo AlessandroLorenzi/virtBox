@@ -5,7 +5,8 @@ from xml.dom import minidom
 import os
 import commands
 
-global folder = '/serverones/'
+global folder
+folder = '/serverones/'
 
 global lvconn
 
@@ -125,7 +126,7 @@ class MacchinaAdd(BaseHandler):
 
 		disktmp = domain_xml.createElement('source')
 
-		commands.getstatusoutput('cp "'+self.folder+'/'+self.get_argument("disk")+'" "'self.folder + '/' + self.get_secure_cookie("AuthUsername")+'_'+self.get_argument("nome") +'.qcow"')
+		commands.getstatusoutput('cp "'+self.folder+'/'+self.get_argument("disk")+'" "' +self.folder + '/' + self.get_secure_cookie("AuthUsername")+'_'+self.get_argument("nome") +'.qcow"')
 		disktmp.setAttribute('file',  self.folder + '/' + self.get_secure_cookie("AuthUsername")+'_'+self.get_argument("nome") +'.qcow')
 		disk.appendChild(disktmp)
 

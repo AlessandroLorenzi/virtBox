@@ -20,7 +20,7 @@ from handlers.macchine import Macchine, MacchinaAdd, MacchinaDetails, MacchinaDe
 
 
 
-define( "port", default = 8888, help="run on the fiven port", type = int)
+define( "port", default = 8080, help="run on the fiven port", type = int)
 
 class Application(tornado.web.Application):
 	def __init__(self):
