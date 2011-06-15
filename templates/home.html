@@ -1,11 +1,19 @@
 {% extends "../templates/main.html" %}
-{%block menu-utente%}{%end%}
+{%block menu-home%}attivo{%end%}
 
 {% block main %}
+	<script type="text/javascript" src="/static/clientSideInclude.js" ></script>
+	<div id="path">Home</div>
 	<div id="colonna-sinistra">
 		<div class="box">
 			<h2>Benvenuti in virtBox! </h2>
-			<p>VirtBox é un progetto che..</p>
+			<p>VirtBox &egrave; un'interfaccia web a libvirt. L'obiettivo &egrave; fornire uno strumento semplice 
+			per la gestione di macchine virtuali con il supporto alla multiutenza.</p>
+			<p>Il login da parte degli studenti dell'unimi &egrave; il login del silab, ossia iniziale del nome
+			, iniziale del cognome e matricola.<br />
+			Ad esempio il nome utente di Mario Rossi, matricola 123456 sar&agrave; mr123456.</p>
+			<p>Per suggerimenti e bug-report scrivetemi a:
+			<a href="mailto:alessandro.lorenzi@gmail.com">alessandro.lorenzi[at]gmail.com</a></p>
 		</div>
 	</div>
 	
@@ -20,22 +28,30 @@
 			{%end%}
 			<ul>
 				{% if user == ""%}
-					<li><a href="/utente/registra/">Registra</a></li>
-					<li><a href="/utente/login/">Login</a></li>
+	<!--				<li><a href="/user/register/">Registra</a></li>-->
+					<li><a href="/user/login/">Login</a></li>
 				{% else %}
-					<li><a href="/utente/logout/">Logout</a></li>
+					<li><a href="/user/logout/">Logout</a></li>
 				{%end%}
 			</ul>
 		</div>
+		<div class="box" >
+			<h3>Ultime News </h3>
+			<div id="news"  >
+				<img src="/static/loading.gif" />
+			</div>
+			<script>
+				clientSideInclude('news', '/static/news.html');
+			</script>
+		</div>
 		<div class="box">
-			<h2>Ultime News </h2>
-			<ul>
-				<li><a href="#">Questa é una news</a></li>
-				<li><a href="#">Questa é la seconda news</a></li>
-				<li><a href="#">Questa é la terz'ultima news</a></li>
-				<li><a href="#">Questa é la quarta news</a></li>
-				<li><a href="#">Questa é l'ultima</a></li>
-			</ul>
+		<h3>Powered By...</h3>
+		<p>
+			<!--img src="/static/img/archlinux.png" alt="ArchLinux"/-->
+			<img src="/static/img/debian.png" alt="Debian"/><br />
+			<img src="/static/img/tornado.png" alt="Tornado"/>
+			<img src="/static/img/python.png" alt="Python"/>
+		</p>
 		</div>
 	</div>
 {% end %}

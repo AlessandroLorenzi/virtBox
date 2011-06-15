@@ -13,14 +13,14 @@
 
 <body>
 	<div id="topbar">
-		<img src="/static/img/virtbox.png" />
+		<a href="/"><img src="/static/img/virtbox.png" /></a>
 		<ul>
-			<!-- <li><a href="/utente/" class="{%block menu-utente%}{%end%}">Utente</a></li> -->
-			<li><a href="/macchine/" class="{%block menu-macchine%}{%end%}">Macchine</a></li>
-			<li><a href="/aula/" class="{%block menu-aula%}{%end%}">Aula</a></li>
-			<li><a href="/templates/" class="{%block menu-templates%}{%end%}">Templates</a></li>
+			<li><a href="/" class="{%block menu-home%}{%end%}">Home</a></li>
+			<li><a href="/user/" class="{%block menu-user%}{%end%}">User</a></li>
+			<li><a href="/guests/" class="{%block menu-macchine%}{%end%}">Macchine</a></li>
 		</ul>
 	</div>
+	<div id="breadcrumb"></div>
 	<div id="main">
 		{% block main %}
 		{% end %}

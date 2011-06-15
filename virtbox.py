@@ -13,55 +13,49 @@ import psycopg2 as db
 from tornado.options import define, options
 ''' handlers import '''
 from handlers.homepage import BaseHandler, HomePage
-from handlers.users import UserRegister, UserLogin, UserLogout
-from handlers.templates import Template, TemplateAdd, TemplateDetails, TemplateDel
-from handlers.aule import Aule, AulaAdd, AulaDetails, AulaDel
-from handlers.macchine import Macchine, MacchinaAdd, MacchinaDetails, MacchinaDel, MacchinaRun, MacchinaShow, MacchinaForceOff, Dischi, DiscoAdd
+from handlers.User import UserList, User, GenericUser, UserRegister, UserLogin, UserLogout
+from handlers.Guest import Guests, NewGuest, GuestDetails, GuestShow, GuestRun, GuestClone, GuestForceoff, GuestDel, GuestAddGroup, GuestDelGroup, setAsTemplate, GuestChmodUser, DefaultDisk, DeleteDisk
+from handlers.Disk import DiskDownload, Disks
+from conf import conf
 
-
-
-define( "port", default = 8080, help="run on the fiven port", type = int)
+define( "port", default = 8080, help="", type = int)
 
 class Application(tornado.web.Application):
 	def __init__(self):
 		handlers = [
 			(r"/", HomePage),
-			(r"/utente/registra/", UserRegister),
-			(r"/utente/login/", UserLogin),
-			(r"/utente/logout/", UserLogout),
-			(r"/template/", Template),
-			(r"/template/add/", TemplateAdd),
-			(r"/template/(\w*)/", TemplateDetails),
-			(r"/template/(\w*)/del/", TemplateDel),
-			(r"/macchine/", Macchine),
-			(r"/macchina/new/", MacchinaAdd),
-			(r"/macchina/(\w*)/", MacchinaDetails),
-			(r"/macchina/(\w*)/avvia/", MacchinaRun),
-			(r"/macchina/(\w*)/visualizza/", MacchinaShow),
-			(r"/macchina/(\w*)/force_off/", MacchinaForceOff),
-			(r"/macchina/(\w*)/del/", MacchinaDel),
-			(r"/dischi/", Dischi),
-			(r"/disco/add/", DiscoAdd),
+			(r"/users/", UserList),
+			(r"/user/register/", UserRegister),
+			(r"/user/login/", UserLogin),
+			(r"/user/logout/", UserLogout),
+			(r"/user/(\w*)/", User),
+			(r"/user/", GenericUser),
+			(r"/user/(\w*)/addgroup/", UserLogout),
+			(r"/guests/", Guests),
+			(r"/guest/new/", NewGuest),
+			(r"/guest/clone/", GuestClone),
+			(r"/guest/([\w%\-.]*)/", GuestDetails),
+			(r"/guest/([\w%\-.]*)/run/", GuestRun),
+			(r"/guest/([\w%\-.]*)/visualizza/", GuestShow),
+			(r"/guest/([\w%\-.]*)/force_off/", GuestForceoff),
+			(r"/guest/([\w%\-.]*)/del/", GuestDel),
+			(r"/guest/([\w%\-.]*)/chmoduser/", GuestChmodUser),
+			(r"/guest/([\w%\-.]*)/defaultdisk/([\w%\-]*)/", DefaultDisk),
+			(r"/guest/([\w%\-.]*)/deletedisk/([\w%\-]*)/", DeleteDisk),
+			(r"/disks/", Disks),
+			(r"/disk/download/", DiskDownload),
 		]
 		
-		settings = {
-			"base_address": "http://127.0.0.1",
-			"project_name" : "virtBox",
-			"static_path": os.path.join(os.path.dirname(__file__), "static"),
-			"template_path": os.path.join(os.path.dirname(__file__), "templates"),
-			"cookie_secret": "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
-			"login_url": "/user/login/",
-			"xsrf_cookies": True,
-		}
+		settings = conf.app_settings
 		
 		tornado.web.Application.__init__(self, handlers, **settings)
 		
-		print "== connecting to database =="
-		self.database = db.connect(database="virtbox", user="alorenzi")
+		sys.stdout.write (" Connecting to database .... [WORK]")
+		sys.stdout.flush()
+		self.database = db.connect("dbname='%s' user='%s' host='%s' password='%s'  " % (conf.db_name, conf.db_user, conf.db_host, conf.db_password))
 		self.cursor = self.database.cursor()
+		sys.stdout.write ("\r Connecting to database .... [DONE] \n")
 		
-		self.cursor.execute("SELECT count(matricola) as matricola_exist FROM utenti WHERE matricola = 706306;")	
-		self.database.commit()
 		
 
 		
@@ -70,7 +64,7 @@ class Application(tornado.web.Application):
 		tornado.options.parse_command_line()
 		http_server = tornado.httpserver.HTTPServer(Application())
 		http_server.listen(options.port)
-		print "== I'm ready baby ;) =="
+		print " {SYSTEM READY} "
 		tornado.ioloop.IOLoop.instance().start()		
 		
 app = Application()

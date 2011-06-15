@@ -13,8 +13,20 @@ a img{
 	border: 0px; 
 	text-decoration: none;
 }
+div.box { 
+	margin-bottom: 1.5em; padding: 0.65em; background: #ecf2f5; border: 1px solid #bcd; 
+--	-moz-border-radius: 15px;
+--	-webkit-border-radius: 15px;
+}
+.minibox { 
+	background: #ecf2f5; border: 1px solid #bcd; 
+--	-moz-border-radius: 5px;
+--	-webkit-border-radius: 5px;
+}
 
-div.box { margin-bottom: 1.5em; padding: 0.65em; background: #ecf2f5; border: 1px solid #bcd; }
+.inline-block{
+	display: inline-block;
+}
 
 .box table td{
 	padding: 5px 10px;
@@ -59,6 +71,12 @@ div.error { margin-bottom: 1.5em; padding: 0.65em; background: #f5ecf2; border: 
 #topbar ul li a.attivo{
 	color: #FFF;
 }
+#path{
+	position: absolute;
+	left: 10px;
+	top: 60px;
+	font-size:10px;
+}
 
 #main{
 	width: 1000px;
@@ -82,4 +100,33 @@ div.error { margin-bottom: 1.5em; padding: 0.65em; background: #f5ecf2; border: 
 .label{
 	float: left;
 	width: 200px;
+}
+#news{
+
+}
+#news ul{
+	list-style: none;
+	padding-left:0 ;
+}
+
+#news a{
+	font-size:12px;
+}
+.news0, .news1{
+	padding: 2px
+}
+.news1{
+	background-color:#FDD;
+}
+
+.news1:hover{
+	background-color: #ADD;
+}
+
+.news0:hover{
+	background-color: #DBA;
+}
+
+#news img{
+	margin-left: 150px;
 }

@@ -18,6 +18,9 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class HomePage(BaseHandler):
 	def get(self):
-		user = self.get_secure_cookie("AuthUsername");
+		user = self.get_secure_cookie("AuthUsername")
+		if not user:
+			self.set_secure_cookie("AuthUsername", '')
+			user=""
 		self.render("home.html",user = user)
 
