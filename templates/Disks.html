@@ -1,0 +1,28 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+
+<div id="path"><a href="/">Home</a> &raquo; Lista Dischi</div>
+	<p><a href="/disk/download/">Scarica disk su Server</a></p>
+	<h2>Lista Dischi</h2>
+	<div class='box'>
+	<table>
+	
+			<td> </td><td>Nome</td><td>URI</td>
+	{% for disk in disks %}
+		
+		<tr>
+			{%if disk[2] != '0' %}
+				<td> <div style="width:16px; height: 16px; background-color: #F00">&nbsp;</div></td> 
+			{%else%}
+				<td> <div style="width:16px; height: 16px; background-color: #0F0">&nbsp;</div></td> 
+			{%end%}
+			<td>{{disk[0]}} </td><td>{{disk[1]}}</td>
+		</tr> 
+	{% end %}
+	</table>
+	</div>
+{% end %}
+
+

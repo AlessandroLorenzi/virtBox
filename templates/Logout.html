@@ -1,0 +1,23 @@
+dopp{% extends "../templates/main.html" %}
+{%block menu-utente%}attivo{%end%}
+
+{%block main%}
+<div id="path"><a href="/">Home</a> &raquo; Logout</div>
+{% if error == 0 %}
+	<div class="box">
+		<p>
+			LogOut effettuato con successo!
+		</p>
+	</div>
+{% else %}
+	<div class="error">
+		<p>
+			Si é verificato un errore
+		</p>
+	</div>
+{% end %}
+
+
+
+{%end%}
+

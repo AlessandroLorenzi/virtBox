@@ -1,0 +1,30 @@
+{% extends "../templates/main.html" %}
+{%block menu-utente%}attivo{%end%}
+
+{%block main%}
+
+{% if error != 0 %}
+
+	<div id="path"><a href="/">Home</a> &raquo; Login</div>
+	<div class="error">
+		<p>
+			Si é verificato un errore! {{error}}
+		</p>
+	</div>
+{% end %}
+<form method="post">
+	{{ xsrf_form_html() }}
+	<div class="label">Matricola </div><input type="text" name="username" />  <br />
+	<div class="label">Password </div><input type="password" name="passwd" /><br /> 
+	<input type ="submit" value= "registra" />
+</form>
+<div class="separator" >&nbsp;</a>
+		<div class="box">
+			<p>Il login da parte degli studenti dell'unimi &egrave; il login del silab, ossia iniziale del nome
+			, iniziale del cognome e matricola.<br />
+			Ad esempio il nome utente di Mario Rossi, matricola 123456 sar&agrave; mr123456.</p>
+			<p>Per suggerimenti e bug-report scrivetemi a:
+			<a href="mailto:alessandro.lorenzi@gmail.com">alessandro.lorenzi[at]gmail.com</a></p>
+		</div>
+
+{%end%}

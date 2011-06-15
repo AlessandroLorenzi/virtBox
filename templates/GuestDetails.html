@@ -1,0 +1,105 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+	
+	<div id="path"><a href="/">Home</a> &raquo; <a href="/guests/">Lista Macchine</a> &raquo; {{name}}</div>
+	<h2>Dettagli guest "{{name}}"</h2>
+	<div >
+	<p>	
+		memoria : {{memory}}Mb <br />
+		emulatore: {{emulator}} <br />
+		cpu: {{vcpu}} <br />
+		architettura: {{arch}} <br />
+		{% if vnc_port != '-1' %}
+			vnc: <a href="vnc://darkstar.ricerca.dico.unimi.it:{{vnc_port}}">darkstar.ricerca.dico.unimi.it:{{vnc_port}}</a><br />
+			password: <span style="color:#000; background-color:#000">{{vnc_passwd}}</span> ( selezionare il testo per visualizzare la passwd )<br />
+		{% end %}
+		{% if active == 0 %}
+			La guest &egrave; inattiva - <a href="/guest/{{name}}/run/">Avvia</a> 
+<!--			Nuovo nome:
+			<form method="post" action='/guest/clone/' >
+				{{ xsrf_form_html() }}
+				<input type="hidden" value="{{name}}" name="original"/>
+				<input type="text" value="" name="new"/>
+				<input type="submit" value="clona" />
+			</form> -->
+		{% else %}
+			La guest &egrave; attiva - <a href="/guest/{{name}}/force_off/">ForceOff</a>
+		{% end %} - <a href="/guest/{{name}}/del/">Elimina</a><br />
+	</p>
+	<h3>Permessi</h3>
+	<p>
+		{% for perm in permissions %}
+			<form action="/guest/{{name}}/chmoduser/" method="post">
+			 {{ xsrf_form_html() }}
+			<strong>{{perm['name']}}</strong>
+			<input type="hidden" name="user" value="{{perm['name']}}" />
+			<input type="checkbox" style="visibility:hidden" name="act" value="prova" checked="1"/>
+
+			{%for act in ['show', 'run', 'delete', 'clone', 'chmod'] %}
+			<span class="minibox">	{{act}}: <input type="checkbox" name="act" style="margin-top: 3px;" value="{{act}}" {% if perm[act]=='1' %}checked="1"{%end%}/></span>
+			{%end%}
+				<input type="submit" value="modifica" />
+				<br />
+			</form>
+		{% end %}
+
+			<form action="/guest/{{name}}/chmoduser/" method="post">
+			 {{ xsrf_form_html() }}
+			<select name="user">
+				<option value="">--</option>
+				{%for user in users%}
+					<option value="{{user}}">{{user}}</option>
+				{%end%}
+			</select>
+			{%for act in ['show', 'run', 'delete', 'clone', 'chmod'] %}
+			<span class="minibox">	{{act}}: <input type="checkbox" name="act" style="margin-top: 3px;" value="{{act}}" /></span>
+			{%end%}
+				<input type="submit" value="modifica" />
+				<br />
+			</form>
+		
+	</p>
+	<h3>Dischi</h3>
+	<div class= "box">
+
+		{% for device in devices %}
+		<h4>{{device['name']}}</h4>
+		<p>
+				path: {{device['path']}}<br />
+				dev: {{device['dev']}}<br />
+				<span style="font-size: small"><a href="/guest/{{name}}/defaultdisk/{{device['typed']}}/">Set default</a></span> - 
+				<span style="font-size: small"><a href="/guest/{{name}}/deletedisk/{{device['typed']}}/">delete</a></span>
+		</p>
+		{% end %}
+	</div>
+
+
+<!-- 
+     index.html - an example HTML page for TightVNC Java viewer applet, to be
+     used with a standalone Web server running on the same machine where the
+     TightVNC server is running. Before using this example, please MAKE SURE
+     to check the following:
+
+     * the value of the PORT parameter should be set correctly (normally, the
+       port number is 5900 + display number);
+
+     * the CODE and ARCHIVE attributes of the <APPLET> tag should point to
+       the correct directory (this example assumes that this page is in the
+       same directory with .jar and .class files);
+
+     * the WIDTH and HEIGHT attributes of the <APPLET> tag correspond to the
+       actual desktop size on the server (height should be increased to leave
+       enough space for the button panel).
+-->
+
+		{% if vnc_port != '-1' %}
+<APPLET CODE="VncViewer.class" ARCHIVE="/static/classes/VncViewer.jar"
+        WIDTH="800" HEIGHT="632">
+		<PARAM NAME="PORT" VALUE="{{vnc_port}}"/>
+		<PARAM NAME="HOST" VALUE="darkstar.ricerca.dico.unimi.it"/>
+		<PARAM NAME="PASSWORD" VALUE="{{vnc_passwd}}"/>
+</APPLET>
+{%end%}
+{% end %}

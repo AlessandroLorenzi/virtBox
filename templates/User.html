@@ -1,0 +1,31 @@
+{% extends "../templates/main.html" %}
+{%block menu-user%}attivo{%end%}
+
+{% block main %}
+
+	<div id="path"><a href="/">Home</a> &raquo; <a href="/users/">Lista Utenti</a> &raquo; {{username}}</div>
+	<h2>{{ username }}</h2>
+	<div class="box" >
+		<p>
+			username: {{username}} <br />
+			nome:{{surname}}{{name}}
+		</p>
+	</div>
+	<!--
+	<h3>gruppi</h3>
+		{%for group in groups%}
+		<div style="border-bottom: 3px">
+			<div class="minidiv inline-block">{{group}}</div> <a href="/user/{{username}}/delgroup/{{group}}/">elimina</a>
+		</div>
+		{% end %}
+		<form method="post" action="/user/{{username}}/addgroup/">
+		{{ xsrf_form_html() }}
+		<select name="group">
+		{%for group in egroups%}
+			<option name="{{group}}">{{group}}</option>
+		{% end %}
+		</select><input type="submit" value="Aggiungi"/>
+		</form>
+-->
+{% end %}
+

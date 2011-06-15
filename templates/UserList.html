@@ -1,0 +1,14 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+
+	<div id="path"><a href="/">Home</a> &raquo; Lista Utenti</div>
+	{%for user in users%}
+	<div style='margin-bottom: 3px'>
+	<div class="minibox inline-block" style="width: 150px; padding: 3px">{{ user }}</div>
+	<div class="inline-block" style=" padding: 3px"><a href="/user/{{ user }}/"/>Dettagli</a></div>
+	</div>
+	{%end%}	
+{% end %}
+

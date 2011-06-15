@@ -1,0 +1,56 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+
+	<div id="path"><a href="/">Home</a> &raquo; <a href="/guests/">Lista Macchine</a> &raquo; Nuova Macchina</div>
+	{% if error != 0 %}
+	<div class="error">
+		<p>
+			Si &egrave; verificato un errore! ERR{{error}}
+		</p>
+	</div>
+	{% end %}
+	<form method="post">
+		{{ xsrf_form_html() }}
+		<div class="label">Nome </div><input type="text" name="name" value="New_Guest"/>  <br />
+		<div class="label">Ram </div>
+			<select  name="ram" >
+				<option value="512">512 Mb</option>
+				<option value="1024">1 Gb</option>
+				<option value="2048">2 Gb</option>
+			</select> <br />
+		<div class="label">Architettura </div>
+			<select  name="arch" />
+				<option value="i686">i686</option>
+				<!--option value="amd64">amd64</option-->
+			</select>
+			  <br />
+		<div class="label">DiskImage</div>
+		<select  name="cdrom" >
+		{% for disk in disks%}
+			{% if disk[2] == 1 %}
+				<option value="{{disk[0]}}">{{disk[0]}}</option>
+			{%end%}
+		{% end %}
+			</select> 
+		 <br />
+		<div class="label">Hard Disk </div>
+			<select  name="disk" >
+				<option value="5G">5 Gb</option>
+				<option value="10G">10 Gb</option>
+				<option value="20G">20 Gb</option>
+			</select> <br />
+		<div class="label">Crea da immagine</div>
+		<select name="hdd_image" />
+			<option value="0">--</option>
+		{% for hdd_image in hdd_images%}
+			<option value="{{hdd_image[0]}}">{{hdd_image[0]}}</option>
+		{% end %}
+		</select> 
+		 <br />
+		
+		<input type ="submit" value= "registra" />
+</form>
+{% end %}
+

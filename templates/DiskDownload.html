@@ -1,0 +1,24 @@
+{% extends "../templates/main.html" %}
+{%block menu-macchine%}attivo{%end%}
+
+{% block main %}
+<div id="path"><a href="/">Home</a> &raquo; <a href="/disks/">Lista Dischi</a> &raquo; Scarica Disco</div>
+{% if error == 1 %}
+
+	<div class="error">
+		<p>
+			Si é verificato un errore! {{error}} <br />
+			La macchina é giá esistente!
+		</p>
+	</div>
+{% end %}
+	<div class='box'>
+	<form method="post">
+		{{ xsrf_form_html() }}
+<!--		<div class="label">nome </div><input type="text" name="nome" />  <br /> -->
+		<div class="label">uri (http, ftp) </div><input type="text" name="uri" /><br /> 
+		<input type ="submit" value= "scarica" />
+	</form>
+	</box>
+{% end %}
+
