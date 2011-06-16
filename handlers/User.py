@@ -1,4 +1,5 @@
 from handlers.homepage import BaseHandler
+from conf import conf
 import hashlib
 import time
 
@@ -112,7 +113,7 @@ class UserLogi_old (BaseHandler):
 		
 		for (i) in  self.cursor:
 			verified =  i[0]
-		
+	
 		if  verified:
 			print ("%s %s " %(username, passwd))
 			self.set_secure_cookie("AuthUsername", str(username))
@@ -141,7 +142,13 @@ class UserLogin (BaseHandler):
 		secret = b"d4rkst4r"
 
 		r = RADIUS(secret,host,port)
-
+		if conf.enable_guest == 1 and username == "guest":
+			self.set_secure_cookie("AuthUsername", str(username))
+			self.update_database(username, passwd)
+			self.render("Login_ok.html")
+			return
+			
+		
 		if  r.authenticate(str("%s@silab.dsi.unimi.it" %username),str(passwd)):
 			self.set_secure_cookie("AuthUsername", str(username))
 			self.update_database(username, passwd)
