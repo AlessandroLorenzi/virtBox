@@ -2,6 +2,7 @@ from handlers.homepage import BaseHandler
 import libvirt, os, sys, commands, urllib, random, xml
 from xml.dom import minidom
 from handlers.Permission import Permission
+from conf import conf
 
 global folder
 folder = '/serverones/'
@@ -11,8 +12,13 @@ global lvconn
 
 sys.stdout.write (" Connecting to libvirtd .... [WORK]")
 sys.stdout.flush()
-lvconn = libvirt.open('qemu+ssh://virtmaster@darkstar.ricerca.dico.unimi.it/system')
-sys.stdout.write ("\r Connecting to libvirtd .... [DONE]\n")
+try:
+	lvconn = libvirt.open(conf.libvirt_str)
+except:
+	print ("\r Connecting to libvirtd .... [ERR ]\n")
+	exit(1)
+else:
+	sys.stdout.write ("\r Connecting to libvirtd .... [DONE]\n")
 
 '''
 	Stampa la lista delle macchine installate su cui l'utente
@@ -169,7 +175,6 @@ class NewGuest (BaseHandler):
 			disk_list.append(disk[1])
 			
 			cmd = "ps aux | grep '%s' | grep aria2c | grep -v grep | wc -l" %disk[1]
-			scmd = 'ssh darkstar.ricerca.dico.unimi.it "%s"' % str(cmd)
 			if  int(commands.getstatusoutput(cmd)[1]) == 0:
 				disk_list.append(1)
 			else:
@@ -190,7 +195,7 @@ class NewGuest (BaseHandler):
 			return
         
 		guest_name = self.get_secure_cookie("AuthUsername")+"_"+self.get_argument("name")
-		folder = '/serverones/libvirt/images/'
+		folder = conf.images_dir
 
 
 		domain_xml =  xml.dom.minidom.Document()
@@ -287,7 +292,6 @@ class NewGuest (BaseHandler):
 		source.setAttribute('file',  "%s/%s.qcow" % (folder, guest_name))
 		disk.appendChild(source)
 
-		#qemuimg = ('ssh darkstar.ricerca.dico.unimi.it \'/usr/bin/qemu-img create -f qcow2 "%s/%s.qcow" \' %s' % 
 		if  self.get_argument("hdd_image") == '0':
 			cmd = ('/usr/bin/qemu-img create -f qcow2 "%s/%s.qcow" %s' % 
 				(folder, guest_name, self.get_argument("disk")))
@@ -384,7 +388,6 @@ class DefaultDisk (BaseHandler):
 			os= os[0]
 			devices = xml.getElementsByTagName("devices")
 			devices= devices[0]
-			#print(devices.toprettyxml())
 			boot = xml.getElementsByTagName("boot")
 			for tmpboot in boot:
 				os.removeChild(tmpboot)
@@ -441,6 +444,7 @@ class DeleteDisk (BaseHandler):
 
 '''
 	Effettua il clone di una guest
+	/////// ALPHA ///////
 '''
 class GuestClone (BaseHandler):
 	def post(self):
@@ -454,9 +458,8 @@ class GuestClone (BaseHandler):
 			self.redirect('/')
 			return
 		new= self.get_secure_cookie("AuthUsername")+'_'+str(self.get_argument("new"))
-		diskname='/serverones/libvirt/images/'+new+'.qcow'
+		diskname=conf.images_dir+'/'+new+'.qcow'
 		cmd = "virt-clone -o %s -n %s -f %s --connect=qemu+ssh://127.0.0.1/system " % (original, new, diskname)
-		scmd = 'ssh virtmaster@darkstar.ricerca.dico.unimi.it "%s" ' % cmd 
 		try:
 			commands.getstatusoutput(cmd)
 			self.cursor.execute("SELECT CreateGuest('%s', '%s')" %
@@ -512,7 +515,7 @@ class GuestDel (BaseHandler):
 			self.database.rollback()
 		else:
 			self.database.commit()
-			folder = '/serverones/libvirt/images/'
+			folder = conf.images_dir
 			cmd = "rm -f %s/%s.qcow " % (folder, name )
 			commands.getstatusoutput(cmd)
 		self.redirect('/guests/')
