@@ -111,6 +111,7 @@ class GuestDetails (BaseHandler):
 			device = {
 				'name': name,
 				'path': path,
+				'link' : 'http://darkstar.ricerca.dico.unimi.it/static/storage/'+os.path.basename(path),
 				'dev': dev,
 				'typed': typed,
 			}

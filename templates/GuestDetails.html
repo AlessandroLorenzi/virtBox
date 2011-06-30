@@ -70,7 +70,8 @@
 				path: {{device['path']}}<br />
 				dev: {{device['dev']}}<br />
 				<span style="font-size: small"><a href="/guest/{{name}}/defaultdisk/{{device['typed']}}/">Set default</a></span> - 
-				<span style="font-size: small"><a href="/guest/{{name}}/deletedisk/{{device['typed']}}/">delete</a></span>
+				<span style="font-size: small"><a href="/guest/{{name}}/deletedisk/{{device['typed']}}/">delete</a></span> -
+				<span style="font-size: small"><a  href="{{device['link']}}" >download</a></span>
 		</p>
 		{% end %}
 	</div>
