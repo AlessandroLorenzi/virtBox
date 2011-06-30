@@ -12,6 +12,8 @@ class conf:
 	images_dir = ''		
 	ssh_conn = ""
 	libvirt_str = ''
+	enable_guest = 1
+
 		
 	app_settings = {
 		"base_address": "http://127.0.0.1",
