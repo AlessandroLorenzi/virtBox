@@ -8,6 +8,7 @@ import time
 '''
 class User (BaseHandler):
 	def get(self, username):
+		surname = None
 		try:
 			usercursor = self.database.cursor()
 			usercursor.execute("SELECT * FROM vuser WHERE username = '%s';" %(username))
@@ -20,6 +21,9 @@ class User (BaseHandler):
 			'''
 		except:
 			self.database.rollback()
+			self.render("UserNotFound.html")
+			return
+
 		else:
 			try: 
 				self.database.commit()
@@ -41,7 +45,11 @@ class User (BaseHandler):
 				'''				
 			except:
 				self.render("UserNotFound.html")
-		self.render("User.html", username=username, surname=surname, name = name, groups=groups, egroups=egroups)	
+		if surname == None:
+			self.render("UserNotFound.html")
+		else:
+			self.render("User.html", username=username, surname=surname, name = name, groups=groups, egroups=egroups)	
+
 '''
 	reindirizza l'utente alla propria pagina
 '''
